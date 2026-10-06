@@ -143,21 +143,32 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,n);return e},
     <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path fill="currentColor" d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg>
   </a>
 </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  if (!window.ttq) return;
+
+  // TikTok standard event: important service/landing page viewed.
+  ttq.track('ViewContent', {
+    contents: [{
+      content_id: 'alraed-pest-control',
+      content_type: 'product_group',
+      content_name: 'الرائد لمكافحة الحشرات'
+    }],
+    currency: 'SAR'
+  });
+
+  // TikTok standard event: visitor contacts the business.
   document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
     link.addEventListener('click', function () {
-      if (window.ttq) ttq.track('Contact', {
-        contact_method: 'phone'
-      });
+      ttq.track('Contact');
     });
   });
 
+  // WhatsApp is also a direct contact action.
   document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
     link.addEventListener('click', function () {
-      if (window.ttq) ttq.track('Contact', {
-        contact_method: 'whatsapp'
-      });
+      ttq.track('Contact');
     });
   });
 });
